@@ -12,18 +12,25 @@ public class EnemySpawnSystem
     private Vector2 mSpawnRegionMin, mSpawnRegionMax;
 
     private int mEnemyDestroyed = 0;
-
+    private bool isRandom =false;//abcdef or random destination
     public EnemySpawnSystem(Vector2 min, Vector2 max)
     {
         // Make sure all enemy sees the same EnemySystem and WayPointSystem
-        EnemyBehavior.InitializeEnemySystem(this);
+        EnemyBehavior.InitializeEnemySystem(this,isRandom);
 
         mEnemyTemplate = Resources.Load<GameObject>("Prefabs/Enemy");
         mSpawnRegionMin = min * 0.9f;
         mSpawnRegionMax = max * 0.9f;
         GenerateEnemy();
     }
-
+    public void SetisRandom(bool f)
+    {
+        isRandom = f;
+    }
+    public bool GetisRandom()
+    {
+        return isRandom;
+    }
     private void GenerateEnemy()
     {
         for (int i = mTotalEnemy; i < kMaxEnemy; i++)

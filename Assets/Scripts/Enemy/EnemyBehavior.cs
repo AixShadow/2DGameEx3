@@ -5,8 +5,8 @@ public partial class EnemyBehavior : MonoBehaviour {
 
     // All instances of Enemy shares this one WayPoint and EnemySystem
     static private EnemySpawnSystem sEnemySystem = null;
-    static private bool isRandom=false;
-    static public void InitializeEnemySystem(EnemySpawnSystem s,bool f) { sEnemySystem = s; isRandom = f; }
+    private bool isRandom=false;
+    static public void InitializeEnemySystem(EnemySpawnSystem s) { sEnemySystem = s; }
     private int mNumHit = 0;
     private const int kHitsToDestroy = 4;
     private const float kEnemyEnergyLost = 0.8f;
@@ -28,7 +28,8 @@ public partial class EnemyBehavior : MonoBehaviour {
         dPointBehaviour = GameObject.Find("DWayPoint").GetComponent<DPointBehaviour>();
         ePointBehaviour = GameObject.Find("EWayPoint").GetComponent<EPointBehaviour>();
         fPointBehaviour = GameObject.Find("FWayPoint").GetComponent<FPointBehaviour>();
-        nowDestintion = isRandom ? Random.Range(0, 6) : 0;
+        nowDestintion = isRandom ? Random.Range(0, 5) : 0;
+        isRandom = sEnemySystem.GetisRandom();
         velocity = (waypoint[nowDestintion] - transform.position).normalized * v;
     }
     public void Update()
@@ -68,7 +69,7 @@ public partial class EnemyBehavior : MonoBehaviour {
             int nextDestination;
             if (isRandom)
             {
-                nextDestination = Random.Range(0, 5);
+                nextDestination = Random.Range(0, 4);
                 if (nextDestination >= nowDestintion) nextDestination++;
             }
             else nextDestination = (nowDestintion + 1) % 6;

@@ -22,7 +22,8 @@ public class GameManager : MonoBehaviour {
         mEnemySystem = new EnemySpawnSystem(b.min, b.max);
     }
 
-	void Update () {
+    void Update()
+    {
         EchoGameState(); // always do this
 
         if (Input.GetKeyDown(KeyCode.J))
@@ -33,6 +34,11 @@ public class GameManager : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.Q))
             Application.Quit();
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            mEnemySystem.SetisRandom(!mEnemySystem.GetisRandom());
+            Debug.Log("Set isRandom in Manager");
+        }
     }
 
 

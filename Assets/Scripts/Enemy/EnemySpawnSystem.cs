@@ -16,7 +16,7 @@ public class EnemySpawnSystem
     public EnemySpawnSystem(Vector2 min, Vector2 max)
     {
         // Make sure all enemy sees the same EnemySystem and WayPointSystem
-        EnemyBehavior.InitializeEnemySystem(this,isRandom);
+        EnemyBehavior.InitializeEnemySystem(this);
 
         mEnemyTemplate = Resources.Load<GameObject>("Prefabs/Enemy");
         mSpawnRegionMin = min * 0.9f;
@@ -26,6 +26,7 @@ public class EnemySpawnSystem
     public void SetisRandom(bool f)
     {
         isRandom = f;
+        Debug.Log("Set isRandom = " + isRandom);
     }
     public bool GetisRandom()
     {

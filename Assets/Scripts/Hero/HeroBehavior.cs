@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class HeroBehavior : MonoBehaviour {
+    public CoolDownBarScript CoolDownBar = null; // reference to the cooldown bar
     
     private EggSpawnSystem mEggSystem = null;
     private const float kHeroRotateSpeed = 90f/2f; // 90-degrees in 2 seconds
@@ -24,8 +25,9 @@ public class HeroBehavior : MonoBehaviour {
         mEggSystem = new EggSpawnSystem();
     }
 
-    void Start ()
+    void Start()
     { 
+        Debug.Assert(CoolDownBar != null, "HeroBehavior: CoolDownBar is not set!");
     }
 	
 	// Update is called once per frame
@@ -61,7 +63,12 @@ public class HeroBehavior : MonoBehaviour {
         if (mEggSystem.CanSpawn())
         {
             if (Input.GetKey("space"))
+            {
                 mEggSystem.SpawnAnEgg(transform.position, transform.up);
+                if (CoolDownBar.ReadyForNext()){
+                        CoolDownBar.TriggerCoolDown();
+                }
+            }
         }
     }
 

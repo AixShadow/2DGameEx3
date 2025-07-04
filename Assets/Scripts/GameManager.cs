@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         EchoGameState(); // always do this
 
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            bool isRandom = mEnemySystem.GetisRandom();
+            mEnemySystem.SetisRandom(!isRandom);
+        }
+
         if (Input.GetKey(KeyCode.Q))
             Application.Quit();
     }
@@ -36,6 +42,6 @@ public class GameManager : MonoBehaviour {
 
     private void EchoGameState()
     {
-        mGameStateEcho.text =  mHero.GetHeroState() + "  " + mEnemySystem.GetEnemyState();
+        mGameStateEcho.text = mEnemySystem.GetWayPointState() + mHero.GetHeroState(); // + "  " + mEnemySystem.GetEnemyState();
     }
 }

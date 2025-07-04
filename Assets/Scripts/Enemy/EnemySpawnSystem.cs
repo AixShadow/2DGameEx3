@@ -45,5 +45,11 @@ public class EnemySpawnSystem
 
     public void OneEnemyDestroyed() { mEnemyDestroyed++;  ReplaceOneEnemy(); }
     public void ReplaceOneEnemy() { mTotalEnemy--; GenerateEnemy(); }
+    public string GetWayPointState() {
+        if (isRandom)
+            return "WAYPOINTS:(Random)   ";
+        else
+            return "WAYPOINTS:(Sequence)   ";
+    }
     public string GetEnemyState() { return "  ENEMY: Count(" + mTotalEnemy + ") Destroyed(" + mEnemyDestroyed + ")"; }
 }
